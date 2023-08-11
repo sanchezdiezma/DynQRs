@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body {
+        background-color:loghtblue;
+        text-align:center;
+      }
+      .loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 2px solid #FF3D00;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  border: 2px solid #FFF;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+    
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+    </style>
+    <body>
+      
+      <script>
+        const AS_URL_BASE = "";
+
+        var url = document.location.href;
+        var k = url.substr(url.lastIndexOf("k=")+2);
+
+        if(k){
+          fetch(AS_URL_BASE+'?k='+k)
+          .then(r => r.text())
+          .then((r) => {
+            console.log(r);
+            //document.write(r);
+            if(r){
+              document.location.replace(r);
+          }
+        })
+          .catch(err => console.log(err))
+        }
+      </script>
+      <span class="loader"></span>
+    </body>
+  </head>
+</html>
+  
